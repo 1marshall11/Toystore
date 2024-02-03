@@ -1,0 +1,330 @@
+package Marshall;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+
+public class Marshall {
+	
+	     String Emaill;
+	     int no=0;
+	     String passcode;
+	     String hello;
+	  //  private static int number;
+	    private static Connection con = null;
+	    private static Scanner sccan = new Scanner(System.in);
+	    
+	public static void main(String[] args)
+	{
+		Marshall classobj = new Marshall();
+		
+try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+		  con=DriverManager.getConnection("jdbc:mysql://localhost:3306/meta","root","0000");
+		 
+
+	        System.out.println("                       Press 1 for SIGN UP \n"+""
+	        		+ "                       Press 2 for SIGN IN \n"
+	        		+ "                       Press 3 for REMOVE  ACCOUNT(ONLY FOR ADMIN)\n\n");
+		    int in=0;
+		    System.out.print("Enter Your Choice : ");
+		    Scanner obj = new Scanner(System.in);
+		    in=obj.nextInt();
+		    
+		    
+		    
+		    switch(in)
+		    {
+		    	case 1:
+		    		classobj.make();
+		    		break;
+		    		
+		    	case 2:
+		    		classobj.give();
+		    		break;
+		    		
+		    	case 3:
+
+		    		
+		    		BufferedReader killer = new BufferedReader(new InputStreamReader(System.in));
+
+                     System.out.println("Enter your admin ID");
+		    		String dell;
+		    		dell = killer.readLine();
+		    		
+		    		
+		    		
+		    		String find ="select * from admin where Email = '"+dell+"'";
+		    		Statement newst = con.createStatement();
+		    		ResultSet newrs = newst.executeQuery(find);
+		    		
+		    		if(newrs.next()) 
+		    		{
+		    			System.out.println("Enter Gmail to remove ");
+		    			String connect =killer.readLine();
+		    			String admin_dele ="delete from data where Email ='"+connect+"'";
+		    		newst.executeUpdate(admin_dele);
+		    		}
+		    			
+		    		
+		    				    		
+		    }
+}	 
+
+catch(Exception e1)
+{
+	System.out.println(e1);
+}
+	 
+}
+	public void make() throws SQLException, IOException
+	{
+		
+		  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	  //String query ="create table data (Id int, Email varchar(20),Password varchar(20))";
+		
+		System.out.print("Enter Your Email: ");
+		Emaill=br.readLine();
+		System.out.print("Enter Password: ");
+		passcode=br.readLine();    
+		        
+		no++;		
+			    
+	        String quer = "insert into data (Id,Email,Password) values ("+no+",'"+Emaill+"','"+passcode+"')";
+		    PreparedStatement st = con.prepareStatement(quer);
+		    st.executeUpdate(quer);
+
+		    int endloop = 0;
+			for(int loop=1; loop>=endloop; loop++) {	    
+		    
+		    System.out.println("\n\tWelcome To Toy Store \n");
+            System.out.println("What would like make \n");
+            System.out.println(
+            		 "1 sock snowman idea\n"
+            		+ "2 Ice-cream stick bookmarks \n"
+            		+ "3 Ice-cream stick fighter plane idea \n"
+            		+ "4 CD hovercraft \n"
+            		+ "5 Pencil Levitation \n"
+            		+ "6 Vase from bottle idea \n"
+            		+ "7 Car from bottles \n"
+            		+ "8 etc \n"
+            		+ "9 for exit \n");
+            System.out.print("Press number according your like : ");
+            int number;
+            number =Integer.parseInt(sccan.nextLine());
+            
+            String No1 = "select * from TT1 where ID = "+number;
+            Statement newst = con.createStatement();
+            ResultSet result = newst.executeQuery(No1);
+            if(result.next()) 
+            {
+           	 String dess = result.getString("KNOW");
+           	System.out.println(dess);
+           	 String animal = null;
+           	 if(number == 2)
+           	 {
+                	 String pip =result.getString("KNOW");
+                	 
+           		 
+                	 System.out.println(pip);
+                	 animal = br.readLine();
+           	if(animal.equals("snake")) 
+           	{
+           		System.out.println("TO MAKE THE SNAKE – ICECREAM STICK ANIMAL BOOKMARKS");
+           		System.out.println("Color a craft stick green using acrylic paint, markers, or brush pens, or use a green-colored stick, to begin with.\r\n"
+           				+ "using black markers, draw circles on the body to mark the scales.\r\n"
+           				+ "Cut a U shape from green construction paper and draw eyes.\r\n"
+           				+ "Cut out a red paper tongue and stick it in place using a glue stick.");
+           	}
+           	
+           	if(animal.equals("tiger")) 
+           	{
+           		System.out.println("TO MAKE THE TIGER- ICECREAM STICK ANIMAL BOOKMARKS");
+           		System.out.println("Color a craft stick yellow using acrylic paint, markers, or brush pens, or use a yellow-colored stick, to begin with.\r\n"
+           				+ "Draw stripes & triangles on the body using a black marker\r\n"
+           				+ "Cut a circle shape from yellow construction paper and draw eyes, whiskers & more stripes\r\n"
+           				+ "stick in place using a glue stick");
+           	}
+           	
+           	if(animal.equals("lion")) 
+           	{
+           		System.out.println("TO MAKE THE LION – ICECREAM STICK ANIMAL BOOKMARKS");
+           		System.out.println("Color a craft stick yellow using acrylic paint, markers, or brush pens, or use a yellow-colored stick, to begin with.\r\n"
+           				+ "Draw circles on the body using a red marker.\r\n"
+           				+ "Cut a circle shape from yellow construction paper and draw eyes and color the edges with orange markers to make the mane.\r\n"
+           				+ "stick in place using a glue stick.");
+           	}
+           	
+           	
+           	
+           	if(animal.equals("zebra")) 
+           	{
+           		System.out.println("TO MAKE THE ZEBRA – ICECREAM STICK ANIMAL BOOKMARKS");
+           		System.out.println("Color a craft stick white using acrylic paint, markers, or brush pens, or use a white-colored stick, to begin with.\r\n"
+           				+ "Draw stripes & triangles on the body using a black marker\r\n"
+           				+ "Cut a circle shape from white construction paper and draw eyes, a pink nose & more stripes\r\n"
+           				+ "stick in place using a glue stick\r\n"
+           				+ "And there you have it! A set of zoo animal puppets your child can play with or use as bookmarks!");
+           	}
+           }
+           	 
+           	 
+            }
+            
+			if(number == 9) 
+            {
+           	 loop = loop *0;
+           	 endloop = endloop + 10;
+            }
+			}
+		    
+		    }
+	
+	public void give() throws SQLException, IOException
+	{
+		 BufferedReader BF = new BufferedReader(new InputStreamReader(System.in));
+
+		 System.out.print("Enter Your Email: ");
+		String one;
+		
+		int endloop = 0;
+		one = BF.readLine();
+		
+	
+		
+		String find ="select * from data where Email = '"+one+"'";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(find);
+		
+		if(rs.next())
+				{
+for(int loop=1; loop>=endloop; loop++) {
+	                         System.out.println("\n\tWelcome To Toy Store \n");
+	                         System.out.println("What would like make \n");
+	                         System.out.println(
+	                         		 "1 sock snowman idea\n"
+	                         		+ "2 Ice-cream stick bookmarks \n"
+	                         		+ "3 Ice-cream stick fighter plane idea \n"
+	                         		+ "4 CD hovercraft \n"
+	                         		+ "5 Pencil Levitation \n"
+	                         		+ "6 Vase from bottle idea \n"
+	                         		+ "7 Car from bottles \n"
+	                         		+ "8 etc \n"
+	                         		+ "9 for exit \n");
+	                         System.out.print("Press number according your like : ");
+	                          
+	       
+		int other_num = 0;
+	                          other_num =Integer.parseInt(sccan.nextLine());
+	                         
+	                         String No1 = "select * from TT1 where ID = "+other_num;
+	                         Statement newst = con.createStatement();
+	                         ResultSet result = newst.executeQuery(No1);
+	                         if(result.next()) 
+	                         {
+	                        	 String dess = result.getString("KNOW");
+	                        	System.out.println(dess);
+	                        	 String animal = null;
+	                        	 if(other_num == 2)
+	                        	 {
+	 	                        	 String pip =result.getString("KNOW");
+	 	                        	 
+	                        		 
+	 	                        	 System.out.println(pip);
+	 	                        	 animal = BF.readLine();
+	                        	if(animal.equals("snake")) 
+	                        	{
+	                        		System.out.println("TO MAKE THE SNAKE – ICECREAM STICK ANIMAL BOOKMARKS");
+	                        		System.out.println("Color a craft stick green using acrylic paint, markers, or brush pens, or use a green-colored stick, to begin with.\r\n"
+	                        				+ "using black markers, draw circles on the body to mark the scales.\r\n"
+	                        				+ "Cut a U shape from green construction paper and draw eyes.\r\n"
+	                        				+ "Cut out a red paper tongue and stick it in place using a glue stick.");
+	                        	}
+	                        	
+	                        	if(animal.equals("tiger")) 
+	                        	{
+	                        		System.out.println("TO MAKE THE TIGER- ICECREAM STICK ANIMAL BOOKMARKS");
+	                        		System.out.println("Color a craft stick yellow using acrylic paint, markers, or brush pens, or use a yellow-colored stick, to begin with.\r\n"
+	                        				+ "Draw stripes & triangles on the body using a black marker\r\n"
+	                        				+ "Cut a circle shape from yellow construction paper and draw eyes, whiskers & more stripes\r\n"
+	                        				+ "stick in place using a glue stick");
+	                        	}
+	                        	
+	                        	if(animal.equals("lion")) 
+	                        	{
+	                        		System.out.println("TO MAKE THE LION – ICECREAM STICK ANIMAL BOOKMARKS");
+	                        		System.out.println("Color a craft stick yellow using acrylic paint, markers, or brush pens, or use a yellow-colored stick, to begin with.\r\n"
+	                        				+ "Draw circles on the body using a red marker.\r\n"
+	                        				+ "Cut a circle shape from yellow construction paper and draw eyes and color the edges with orange markers to make the mane.\r\n"
+	                        				+ "stick in place using a glue stick.");
+	                        	}
+	                        	
+	                        	
+	                        	
+	                        	if(animal.equals("zebra")) 
+	                        	{
+	                        		System.out.println("TO MAKE THE ZEBRA – ICECREAM STICK ANIMAL BOOKMARKS");
+	                        		System.out.println("Color a craft stick white using acrylic paint, markers, or brush pens, or use a white-colored stick, to begin with.\r\n"
+	                        				+ "Draw stripes & triangles on the body using a black marker\r\n"
+	                        				+ "Cut a circle shape from white construction paper and draw eyes, a pink nose & more stripes\r\n"
+	                        				+ "stick in place using a glue stick\r\n"
+	                        				+ "And there you have it! A set of zoo animal puppets your child can play with or use as bookmarks!");
+	                           }
+	                          }
+                             }
+	                       
+                                         
+	                         
+	                         
+	                        
+	                         if(other_num == 9) 
+	                         {
+	                        	 loop = loop *0;
+	                        	 endloop = endloop + 10;
+	                         }
+
+}
+				}
+		                   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
